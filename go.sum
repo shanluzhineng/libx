@@ -1,0 +1,6 @@
+github.com/abmpio/net-rpc v0.0.0-20230228092735-832e807c70bb h1:U9k9G3GYHW3jrA6YbcU2smUaFPCcGitILVjSy7yvdCM=
+github.com/abmpio/net-rpc v0.0.0-20230228092735-832e807c70bb/go.mod h1:szqSwQjEIuw3KfczYhpD2AM2g4lvJW5a4scRt4OAovM=
+github.com/hashicorp/yamux v0.1.1 h1:yrQxtgseBDrq9Y652vSRDvsKCJKOUD+GzTS4Y0Y8pvE=
+github.com/hashicorp/yamux v0.1.1/go.mod h1:CtWFDAQgb7dxtzFs4tWbplKIe2jSi3+5vKbgIO0SLnQ=
+github.com/mitchellh/reflectwalk v1.0.2 h1:G2LzWKi524PWgd3mLHV8Y5k7s6XUvT0Gef6zxSIeXaQ=
+github.com/mitchellh/reflectwalk v1.0.2/go.mod h1:mSTlrgnPZtwu0c4WaC2kGObEpuNDbx0jmZXqmk4esnw=
