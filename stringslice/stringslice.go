@@ -1,5 +1,7 @@
 package stringslice
 
+import "strings"
+
 // StrContains => Contains
 // StringSliceEqual => Equal
 // StringSliceMergeSorted => MergeSorted
@@ -8,6 +10,15 @@ package stringslice
 func Contains(l []string, s string) bool {
 	for _, v := range l {
 		if v == s {
+			return true
+		}
+	}
+	return false
+}
+
+func ContainsIgnoreLowercase(l []string, s string) bool {
+	for _, v := range l {
+		if strings.EqualFold(v, s) {
 			return true
 		}
 	}
