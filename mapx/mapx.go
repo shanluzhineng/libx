@@ -40,8 +40,9 @@ func MergeMaps(src map[string]interface{}, dst map[string]interface{}, opts ...M
 				continue
 			}
 		}
-		tk := keyExists(sk, dst)
+		tk := keyExists(sk, dst, currentOpt.KeyInsensitivise)
 		if tk == "" {
+			// not exist
 			if currentOpt.OnlyReplaceExist {
 				continue
 			}
@@ -55,10 +56,16 @@ func MergeMaps(src map[string]interface{}, dst map[string]interface{}, opts ...M
 	}
 }
 
-func keyExists(k string, m map[string]interface{}) string {
-	lk := strings.ToLower(k)
+func keyExists(k string, m map[string]interface{}, keyInsensitivise bool) string {
+	lk := k
+	if keyInsensitivise {
+		lk = strings.ToLower(k)
+	}
 	for mk := range m {
-		lmk := strings.ToLower(mk)
+		lmk := mk
+		if keyInsensitivise {
+			lmk = strings.ToLower(mk)
+		}
 		if lmk == lk {
 			return mk
 		}
