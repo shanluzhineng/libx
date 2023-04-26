@@ -1,6 +1,6 @@
 package mapx
 
-// extract map[k]v from slice
+// extract map[k]v from []v
 // keySelectFunc cannot be nil
 func FromSlice[k comparable, v any](source []v, keySelectFunc func(v) k) map[k]v {
 	value := make(map[k]v)
@@ -14,7 +14,7 @@ func FromSlice[k comparable, v any](source []v, keySelectFunc func(v) k) map[k]v
 	return value
 }
 
-// extract slice from map[k]v
+// extract []v from map[k]v
 func ToSlice[k comparable, v any](source map[k]v) []v {
 	value := make([]v, 0)
 	if len(source) <= 0 {
@@ -24,4 +24,24 @@ func ToSlice[k comparable, v any](source map[k]v) []v {
 		value = append(value, eachItem)
 	}
 	return value
+}
+
+// extract []k from map[k]v
+func ExtractMapKeys[k comparable, v any](m map[k]v) []k {
+	result := make([]k, 0)
+	for eachKey := range m {
+		result = append(result, eachKey)
+	}
+	return result
+}
+
+func ToInterfaceMap[T comparable, V any](v map[T]V) map[T]interface{} {
+	result := make(map[T]interface{}, 0)
+	if len(v) <= 0 {
+		return result
+	}
+	for eachKey, eachValue := range v {
+		result[eachKey] = eachValue
+	}
+	return result
 }
