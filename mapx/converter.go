@@ -1,5 +1,7 @@
 package mapx
 
+import "sort"
+
 // extract map[k]v from []v
 // keySelectFunc cannot be nil
 func FromSlice[k comparable, v any](source []v, keySelectFunc func(v) k) map[k]v {
@@ -14,7 +16,7 @@ func FromSlice[k comparable, v any](source []v, keySelectFunc func(v) k) map[k]v
 	return value
 }
 
-// extract []v from map[k]v
+// extract map value to []v from map[k]v
 func ToSlice[k comparable, v any](source map[k]v) []v {
 	value := make([]v, 0)
 	if len(source) <= 0 {
@@ -26,7 +28,7 @@ func ToSlice[k comparable, v any](source map[k]v) []v {
 	return value
 }
 
-// extract []string from map[k]v
+// extract map value to []string from map[k]v
 func ToSliceStringWith[k comparable, v any](source map[k]v, valueFunc func(k) string) []string {
 	value := make([]string, 0)
 	if len(source) <= 0 {
@@ -44,6 +46,37 @@ func ExtractMapKeys[k comparable, v any](m map[k]v) []k {
 	for eachKey := range m {
 		result = append(result, eachKey)
 	}
+	return result
+}
+
+// extract []string from map[string]v
+func ExtractMapKeysAsString[v any](m map[string]v) []string {
+	result := make([]string, 0)
+	for eachKey := range m {
+		result = append(result, eachKey)
+	}
+	return result
+}
+
+// extract []string from map[string]v
+func ExtractMapSortedKeysAsString[v any](m map[string]v) []string {
+	result := make([]string, 0)
+	for eachKey := range m {
+		result = append(result, eachKey)
+	}
+	sortedSlice := sort.StringSlice(result)
+	sortedSlice.Sort()
+	return sortedSlice
+}
+
+// extract sorted []k from map[k]v
+// asc sorted
+func ExtractMapSortedKeys[k comparable, v any](m map[k]v, less func(i, j int) bool) []k {
+	result := make([]k, 0)
+	for eachKey := range m {
+		result = append(result, eachKey)
+	}
+	sort.Slice(result, less)
 	return result
 }
 
