@@ -26,6 +26,18 @@ func ToSlice[k comparable, v any](source map[k]v) []v {
 	return value
 }
 
+// extract []string from map[k]v
+func ToSliceStringWith[k comparable, v any](source map[k]v, valueFunc func(k) string) []string {
+	value := make([]string, 0)
+	if len(source) <= 0 {
+		return value
+	}
+	for eachKey := range source {
+		value = append(value, valueFunc(eachKey))
+	}
+	return value
+}
+
 // extract []k from map[k]v
 func ExtractMapKeys[k comparable, v any](m map[k]v) []k {
 	result := make([]k, 0)
