@@ -1,6 +1,22 @@
 package mapx
 
-import "sort"
+import (
+	"encoding/json"
+	"sort"
+)
+
+// 使用json的方式将一个对象转换为另一个对象
+func ConvertObjectTo(src interface{}, dest interface{}) error {
+	data, err := json.Marshal(src)
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(data, dest)
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
 // extract map[k]v from []v
 // keySelectFunc cannot be nil
