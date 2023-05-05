@@ -11,3 +11,12 @@ func ToInterfaceSlice[T any](list []T) []interface{} {
 	}
 	return result
 }
+
+func ToSliceV[SV any, DV any](list []SV, valueSelectFunc func(item SV) DV) []DV {
+	result := make([]DV, 0)
+	for _, eachSV := range list {
+		currentDV := valueSelectFunc(eachSV)
+		result = append(result, currentDV)
+	}
+	return result
+}

@@ -88,3 +88,16 @@ func CloneStringSlice(s []string) []string {
 	copy(out, s)
 	return out
 }
+
+// 排除一个项目中符合条件的成员，并返回一个新的slice
+func Except(s []string, exceptList []string) []string {
+	set := make([]string, 0)
+	for _, eachItem := range s {
+		if Contains(exceptList, eachItem) {
+			//被排除的
+			continue
+		}
+		set = append(set, eachItem)
+	}
+	return set
+}
