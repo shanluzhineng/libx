@@ -4,7 +4,8 @@ import (
 	"bytes"
 	"math"
 	"math/rand"
-	"time"
+
+	"github.com/abmpio/libx"
 )
 
 // 所有可用的十六进制字符，小写
@@ -16,9 +17,11 @@ var DecimalStrings []string = []string{"0", "1", "2", "3", "4", "5", "6", "7", "
 // 随机产生一个字符串
 func RandStrings(length int) string {
 	var buffer bytes.Buffer
-	rand.Seed(time.Now().UnixNano())
+	if !libx.SeededSecurely {
+		libx.SeedMathRand()
+	}
 	for i := 0; i < length; i++ {
-		buffer.WriteString(HexStrings[rand.Intn(len(HexStrings)-1)])
+		buffer.WriteString(HexStrings[rand.Intn(len(HexStrings))])
 	}
 	return buffer.String()
 }
@@ -28,18 +31,22 @@ func RandStringsIn(length int, inString []string) string {
 	if len(inString) <= 0 {
 		return ""
 	}
+	if !libx.SeededSecurely {
+		libx.SeedMathRand()
+	}
 	var buffer bytes.Buffer
-	rand.Seed(time.Now().UnixNano())
 	for i := 0; i < length; i++ {
-		buffer.WriteString(inString[rand.Intn(len(inString)-1)])
+		buffer.WriteString(inString[rand.Intn(len(inString))])
 	}
 	return buffer.String()
 }
 
 // 随机产生一个指定长度的byte数组
 func RandByteArray(length int) []int8 {
+	if !libx.SeededSecurely {
+		libx.SeedMathRand()
+	}
 	datas := make([]int8, length)
-	rand.Seed(time.Now().UnixNano())
 	for i := 0; i < length; i++ {
 		//随机生成-128到127之间的值
 		datas[i] = int8(rand.Intn(127) - 128)
@@ -49,7 +56,9 @@ func RandByteArray(length int) []int8 {
 
 // 在2个值之间随机一个值
 func RandInt32(minValue int, maxValue int) int {
-	rand.Seed(time.Now().UnixNano())
+	if !libx.SeededSecurely {
+		libx.SeedMathRand()
+	}
 	randValue := rand.Intn(maxValue)
 	if minValue < 0 {
 		return randValue - int(math.Abs(float64(minValue)))
