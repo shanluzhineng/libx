@@ -7,6 +7,7 @@ require (
 	github.com/hashicorp/yamux v0.1.1
 	github.com/mitchellh/reflectwalk v1.0.2
 	github.com/stretchr/testify v1.8.2
+	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1
 )
 
 require (
