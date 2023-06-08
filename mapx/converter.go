@@ -32,6 +32,39 @@ func FromSlice[k comparable, v any](source []v, keySelectFunc func(v) k) map[k]v
 	return value
 }
 
+// extract map[k]v from []interface{}
+// keyValueSelectFunc cannot be nil
+// k, map[k]v key type
+// v, map[k]v value type
+// SType, slice element type
+func FromSliceWithT[SType any, k comparable, v any](source []SType, keyValueSelectFunc func(SType) (k, v)) map[k]v {
+	value := make(map[k]v)
+	if len(source) <= 0 {
+		return value
+	}
+	for i := range source {
+		key, keyValue := keyValueSelectFunc(source[i])
+		value[key] = keyValue
+	}
+	return value
+}
+
+// extract map[k]v from []interface{}
+// keyValueSelectFunc cannot be nil
+// k, map[k]v key type
+// v, map[k]v value type
+func FromSliceWith[k comparable, v any](source []interface{}, keyValueSelectFunc func(interface{}) (k, v)) map[k]v {
+	value := make(map[k]v)
+	if len(source) <= 0 {
+		return value
+	}
+	for i := range source {
+		key, keyValue := keyValueSelectFunc(source[i])
+		value[key] = keyValue
+	}
+	return value
+}
+
 // extract map value to []v from map[k]v
 func ToSlice[k comparable, v any](source map[k]v) []v {
 	value := make([]v, 0)
@@ -61,6 +94,15 @@ func ExtractMapKeys[k comparable, v any](m map[k]v) []k {
 	result := make([]k, 0)
 	for eachKey := range m {
 		result = append(result, eachKey)
+	}
+	return result
+}
+
+// extract []v from map[k]v
+func ExtractMapValues[k comparable, v any](m map[k]v) []v {
+	result := make([]v, 0)
+	for _, eachValue := range m {
+		result = append(result, eachValue)
 	}
 	return result
 }
