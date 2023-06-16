@@ -61,7 +61,7 @@ func WriteLinesToFile(filePath string, lines []string) error {
 	}
 	defer f.Close()
 	for _, eachLine := range lines {
-		if _, err := f.WriteString(eachLine); err != nil {
+		if _, err := f.WriteString(eachLine + "\n"); err != nil {
 			err = fmt.Errorf("写入数据到文件%s时出错,错误信息:%s", filePath, err.Error())
 			return err
 		}
