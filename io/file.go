@@ -23,6 +23,11 @@ func ReadFileByLine(path string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
+	return ReadFileContentByLine(file)
+}
+
+// 按行读取文件内容
+func ReadFileContentByLine(file *os.File) ([]string, error) {
 	defer file.Close()
 	fileScanner := bufio.NewScanner(file)
 	fileScanner.Split(bufio.ScanLines)
