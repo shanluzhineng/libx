@@ -1,6 +1,7 @@
 package io
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"os"
@@ -14,6 +15,23 @@ func Exists(path string) bool {
 		return os.IsExist(err)
 	}
 	return true
+}
+
+// 按行读取文件内容
+func ReadFileByLine(path string) ([]string, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+	fileScanner := bufio.NewScanner(file)
+	fileScanner.Split(bufio.ScanLines)
+
+	content := make([]string, 0)
+	for fileScanner.Scan() {
+		content = append(content, fileScanner.Text())
+	}
+	return content, nil
 }
 
 // EnsurePath is used to make sure a path exists
