@@ -12,6 +12,10 @@ func BoolToPtr(v bool) *bool {
 	return &v
 }
 
+func StringToPtr(v string) *string {
+	return &v
+}
+
 // 将bool指针转换为bool,如果指针为nil，则直接返回false
 func PtrToBool(v *bool) bool {
 	if v == nil {
