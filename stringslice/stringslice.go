@@ -115,6 +115,7 @@ func Distinct(s []string, ignoreLowercase bool) []string {
 		if exist {
 			continue
 		}
+		m[key] = true
 		list = append(list, eachS)
 	}
 	return list
