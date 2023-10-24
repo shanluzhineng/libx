@@ -101,3 +101,21 @@ func Except(s []string, exceptList []string) []string {
 	}
 	return set
 }
+
+// 对一个字符串数组去重
+func Distinct(s []string, ignoreLowercase bool) []string {
+	m := make(map[string]bool)
+	list := make([]string, 0)
+	for _, eachS := range s {
+		key := eachS
+		if ignoreLowercase {
+			key = strings.ToLower(key)
+		}
+		exist := m[key]
+		if exist {
+			continue
+		}
+		list = append(list, eachS)
+	}
+	return list
+}
