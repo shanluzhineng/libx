@@ -1,8 +1,6 @@
 package mapx
 
 import (
-	"strings"
-
 	"github.com/abmpio/libx/stringslice"
 )
 
@@ -40,7 +38,7 @@ func MergeMaps(src map[string]interface{}, dst map[string]interface{}, opts ...M
 				continue
 			}
 		}
-		tk := keyExists(sk, dst, currentOpt.KeyInsensitivise)
+		tk := KeyExists(sk, dst, currentOpt.KeyInsensitivise)
 		if tk == "" {
 			// not exist
 			if currentOpt.OnlyReplaceExist {
@@ -56,19 +54,9 @@ func MergeMaps(src map[string]interface{}, dst map[string]interface{}, opts ...M
 	}
 }
 
-func keyExists(k string, m map[string]interface{}, keyInsensitivise bool) string {
-	lk := k
-	if keyInsensitivise {
-		lk = strings.ToLower(k)
+func MergeMapsT[TS comparable, VS any, TD comparable, VD any](srcMap map[TS]VS, toMap map[TD]VD, itemFunc func(srcKey TS, srcValue VS) (TD, VD)) {
+	for sk, sv := range srcMap {
+		toKey, toValue := itemFunc(sk, sv)
+		toMap[toKey] = toValue
 	}
-	for mk := range m {
-		lmk := mk
-		if keyInsensitivise {
-			lmk = strings.ToLower(mk)
-		}
-		if lmk == lk {
-			return mk
-		}
-	}
-	return ""
 }
