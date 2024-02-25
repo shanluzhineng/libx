@@ -30,3 +30,26 @@ func ParseTimeToChinaTimezone(layoutList []string, timeString string) (*time.Tim
 	}
 	return nil, fmt.Errorf("无效的时间,时间格式必须是%s", strings.Join(layoutList, ","))
 }
+
+func DurationHumanText(duration time.Duration) string {
+	if duration <= 0 {
+		return "0 seconds"
+	}
+	remainDuration := duration
+	days := duration / (24 * time.Hour)
+	remainDuration = remainDuration - days*(24*time.Hour)
+
+	hours := remainDuration / time.Hour
+	remainDuration = remainDuration - hours*time.Hour
+
+	minutes := remainDuration / time.Minute
+	remainDuration = remainDuration - minutes*time.Minute
+
+	seconds := remainDuration / time.Second
+	// remainDuration = remainDuration - seconds*time.Second
+	return fmt.Sprintf("%d days %d hours %d minutes %d seconds",
+		days,
+		hours,
+		minutes,
+		seconds)
+}
