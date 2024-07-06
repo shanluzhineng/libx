@@ -5,7 +5,7 @@ import (
 	"math"
 	"math/rand"
 
-	"github.com/abmpio/libx"
+	"github.com/shanluzhineng/libx"
 )
 
 // 所有可用的十六进制字符，小写

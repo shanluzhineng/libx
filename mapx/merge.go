@@ -1,7 +1,7 @@
 package mapx
 
 import (
-	"github.com/abmpio/libx/stringslice"
+	"github.com/shanluzhineng/libx/stringslice"
 )
 
 type MergeConfig struct {

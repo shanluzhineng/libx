@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/abmpio/libx/str"
+	"github.com/shanluzhineng/libx/str"
 )
 
 var (

@@ -1,11 +1,11 @@
-module github.com/abmpio/libx
+module github.com/shanluzhineng/libx
 
 go 1.19
 
 require (
-	github.com/abmpio/net-rpc v0.0.0-20230228092735-832e807c70bb
 	github.com/hashicorp/yamux v0.1.1
 	github.com/mitchellh/reflectwalk v1.0.2
+	github.com/shanluzhineng/net-rpc v0.0.1
 	github.com/stretchr/testify v1.8.2
 	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1
 )
